@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &4377982769040995833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2182152490054120373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b0986759fa3404ebd701dbfdb453a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextLight: {fileID: 0}
+--- !u!1001 &7820546700789857634
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3088394127524040012, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088394127524040012, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 77.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088394127524040012, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088394127524040012, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088394127524040012, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088394127524040012, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088394127524040012, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088394127524040012, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088394127524040012, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088394127524040012, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088394127524040012, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781878903383075435, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_Name
+      value: Light Trigger Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268813333116535977, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_Range
+      value: 13.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268813333116535977, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_Intensity
+      value: 5807.926
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268813333116535977, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_SpotAngle
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8268813333116535977, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+      propertyPath: m_InnerSpotAngle
+      value: 17
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 688207077204822441, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+--- !u!1 &2182152490054120373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8268813334259060439, guid: 2cc90969e83faaf4697baf0960d32801, type: 3}
+  m_PrefabInstance: {fileID: 7820546700789857634}
+  m_PrefabAsset: {fileID: 0}

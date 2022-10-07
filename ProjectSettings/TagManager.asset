@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Light_Box
+  - Heavy_Box
+  - Medium_Box
+  - KillZone
+  - WallTriggerCamera
+  - GrabTrigger
+  - RespawnUp
+  - RespawnLeft
+  - RespawnRight
+  - RespawnDown
+  - Water
+  - Transition
+  - SelectionPlayer
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Ground
+  - Water
+  - UI
+  - Light
+  - Salle01
+  - Player
+  - Flare
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

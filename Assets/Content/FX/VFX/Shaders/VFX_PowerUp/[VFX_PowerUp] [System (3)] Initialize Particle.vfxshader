@@ -1,0 +1,207 @@
+//[VFX_PowerUp] [System (3)] Initialize Particle,5
+//Don't delete the previous line or this one
+#pragma kernel CSMain
+#define NB_THREADS_PER_GROUP 64
+#define HAS_ATTRIBUTES 1
+#define VFX_PASSDEPTH_ACTUAL (0)
+#define VFX_PASSDEPTH_MOTION_VECTOR (1)
+#define VFX_PASSDEPTH_SELECTION (2)
+#define VFX_PASSDEPTH_SHADOW (3)
+#define VFX_USE_LIFETIME_CURRENT 1
+#define VFX_USE_POSITION_CURRENT 1
+#define VFX_USE_VELOCITY_CURRENT 1
+#define VFX_USE_ALIVE_CURRENT 1
+#define VFX_USE_AGE_CURRENT 1
+#define VFX_LOCAL_SPACE 1
+#include "Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXDefines.hlsl"
+
+
+
+
+struct Attributes
+{
+    float lifetime;
+    float3 position;
+    float3 velocity;
+    bool alive;
+    float age;
+};
+
+struct SourceAttributes
+{
+};
+
+
+
+
+#define USE_DEAD_LIST (VFX_USE_ALIVE_CURRENT && !HAS_STRIPS)
+
+RWByteAddressBuffer attributeBuffer;
+ByteAddressBuffer sourceAttributeBuffer;
+
+CBUFFER_START(initParams)
+#if !VFX_USE_SPAWNER_FROM_GPU
+    uint nbSpawned;					// Numbers of particle spawned
+    uint spawnIndex;				// Index of the first particle spawned
+    uint dispatchWidth;
+#else
+    uint offsetInAdditionalOutput;
+	uint nbMax;
+#endif
+	uint systemSeed;
+CBUFFER_END
+
+#if USE_DEAD_LIST
+RWStructuredBuffer<uint> deadListIn;
+ByteAddressBuffer deadListCount; // This is bad to use a SRV to fetch deadList count but Unity API currently prevent from copying to CB
+#endif
+
+#if VFX_USE_SPAWNER_FROM_GPU
+StructuredBuffer<uint> eventList;
+ByteAddressBuffer inputAdditional;
+#endif
+
+#if HAS_STRIPS
+RWStructuredBuffer<uint> stripDataBuffer;
+#endif
+
+#include "Packages/com.unity.visualeffectgraph/Shaders/Common/VFXCommonCompute.hlsl"
+#include "Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.hlsl"
+
+
+
+void SetAttribute_F0142CB9(inout float lifetime, float Lifetime) /*attribute:lifetime Composition:Overwrite Source:Slot Random:Off channels:XYZ */
+{
+    lifetime = Lifetime;
+}
+
+
+
+// Due to a bug in HLSL compiler, disable spurious "unitialized variable" due to mid function return statement
+#pragma warning(push)
+#pragma warning(disable : 4000)
+#if HAS_STRIPS
+bool GetParticleIndex(inout uint particleIndex, uint stripIndex)
+{
+	uint relativeIndex;
+	InterlockedAdd(STRIP_DATA(STRIP_NEXT_INDEX, stripIndex), 1, relativeIndex);
+	if (relativeIndex >= PARTICLE_PER_STRIP_COUNT) // strip is full
+	{
+		InterlockedAdd(STRIP_DATA(STRIP_NEXT_INDEX, stripIndex), -1); // Remove previous increment
+		return false;
+	}
+
+	particleIndex = stripIndex * PARTICLE_PER_STRIP_COUNT + ((STRIP_DATA(STRIP_FIRST_INDEX, stripIndex) + relativeIndex) % PARTICLE_PER_STRIP_COUNT);
+    return true;
+}
+#endif
+#pragma warning(pop)
+
+[numthreads(NB_THREADS_PER_GROUP,1,1)]
+void CSMain(uint3 groupId          : SV_GroupID,
+            uint3 groupThreadId    : SV_GroupThreadID)
+{
+    uint id = groupThreadId.x + groupId.x * NB_THREADS_PER_GROUP;
+#if !VFX_USE_SPAWNER_FROM_GPU
+    id += groupId.y * dispatchWidth * NB_THREADS_PER_GROUP;
+#endif
+
+#if VFX_USE_SPAWNER_FROM_GPU
+    uint maxThreadId = inputAdditional.Load((offsetInAdditionalOutput * 2 + 0) << 2);
+    uint currentSpawnIndex = inputAdditional.Load((offsetInAdditionalOutput * 2 + 1) << 2) - maxThreadId;
+#else
+    uint maxThreadId = nbSpawned;
+    uint currentSpawnIndex = spawnIndex;
+#endif
+
+#if USE_DEAD_LIST
+    maxThreadId = min(maxThreadId, deadListCount.Load(0x0));
+#elif VFX_USE_SPAWNER_FROM_GPU
+    maxThreadId = min(maxThreadId, nbMax); //otherwise, nbSpawned already clamped on CPU
+#endif
+
+    if (id < maxThreadId)
+    {
+#if VFX_USE_SPAWNER_FROM_GPU
+        int sourceIndex = eventList[id];
+#endif
+		uint particleIndex = id + currentSpawnIndex;
+		
+#if !VFX_USE_SPAWNER_FROM_GPU
+        int sourceIndex = 0;
+        /*//Loop with 1 iteration generate a wrong IL Assembly (and actually, useless code)
+        uint currentSumSpawnCount = 0u;
+        for (sourceIndex=0; sourceIndex<1; sourceIndex++)
+        {
+            currentSumSpawnCount += uint(asfloat(sourceAttributeBuffer.Load((sourceIndex * 0x1 + 0x0) << 2)));
+            if (id < currentSumSpawnCount)
+            {
+                break;
+            }
+        }
+        */
+        
+
+#endif
+
+		Attributes attributes = (Attributes)0;
+		SourceAttributes sourceAttributes = (SourceAttributes)0;
+		
+        attributes.lifetime = (float)1;
+        attributes.position = float3(0, 0, 0);
+        attributes.velocity = float3(0, 0, 0);
+        attributes.alive = (bool)true;
+        attributes.age = (float)0;
+        
+
+#if VFX_USE_PARTICLEID_CURRENT
+         attributes.particleId = particleIndex;
+#endif
+#if VFX_USE_SEED_CURRENT
+        attributes.seed = WangHash(particleIndex ^ systemSeed);
+#endif
+#if VFX_USE_SPAWNINDEX_CURRENT
+        attributes.spawnIndex = id;
+#endif
+#if HAS_STRIPS
+#if !VFX_USE_SPAWNER_FROM_GPU
+		
+#else
+        uint stripIndex = sourceIndex;
+#endif
+		stripIndex = min(stripIndex, STRIP_COUNT);
+
+        if (!GetParticleIndex(particleIndex, stripIndex))
+            return;
+
+        const StripData stripData = GetStripDataFromStripIndex(stripIndex, PARTICLE_PER_STRIP_COUNT);
+		InitStripAttributesWithSpawn(maxThreadId, particleIndex, attributes, stripData);
+		// TODO Change seed to be sure we're deterministic on random with strip
+#endif
+        
+        {
+            SetAttribute_F0142CB9( /*inout */attributes.lifetime, (float)1);
+        }
+        
+
+		
+#if VFX_USE_ALIVE_CURRENT
+        if (attributes.alive)
+#endif       
+        {
+#if USE_DEAD_LIST
+	        uint deadIndex = deadListIn.DecrementCounter();
+            uint index = deadListIn[deadIndex];
+#else
+            uint index = particleIndex;
+#endif
+            attributeBuffer.Store((index * 0x1 + 0x0) << 2,asuint(attributes.lifetime));
+            attributeBuffer.Store3((index * 0x8 + 0xC) << 2,asuint(attributes.position));
+            attributeBuffer.Store3((index * 0x4 + 0x6C) << 2,asuint(attributes.velocity));
+            attributeBuffer.Store((index * 0x8 + 0xF) << 2,uint(attributes.alive));
+            attributeBuffer.Store((index * 0x8 + 0x10) << 2,asuint(attributes.age));
+            
+
+        }
+    }
+}

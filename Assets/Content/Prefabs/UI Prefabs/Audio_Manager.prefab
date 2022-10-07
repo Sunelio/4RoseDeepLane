@@ -1,0 +1,771 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &244912476407256171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5136104662262025570}
+  - component: {fileID: 5790047210585064622}
+  m_Layer: 0
+  m_Name: Audio_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5136104662262025570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244912476407256171}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 913.46484, y: 497.20508, z: -606.5745}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5790047210585064622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244912476407256171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9080500fc2f5fc240ab723a8d79ffe26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theMixer: {fileID: 24100000, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+  sounds:
+  - name: Theme
+    clip: {fileID: 8300000, guid: 70e0e55e3b458f44fab8946106fa0af5, type: 3}
+    ModifSFX: {fileID: 4087128839195617141, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    Awake: 1
+    source: {fileID: 0}
+  SFXSounds:
+  - name: PlayerJump1
+    clip: {fileID: 8300000, guid: 99aea307261cf2443964af0f6ec84b99, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: PlayerJump2
+    clip: {fileID: 8300000, guid: 2f87ea3dff4ddfa47be6a767aac1f551, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: PlayerJump3
+    clip: {fileID: 8300000, guid: d5793f0537b809845bba64f93c5510f7, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: PlayerJump4
+    clip: {fileID: 8300000, guid: adb4888e2a956c442bc2634ecf5a23b1, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: SelectionGravityOn
+    clip: {fileID: 8300000, guid: 0941c4b34874dea4c9ccd14e00d3645a, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: SelectionGravityOff
+    clip: {fileID: 8300000, guid: 1c70c206702d32f4bb943a825cd72d56, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: ProjectionValid
+    clip: {fileID: 8300000, guid: 3a4eff4bf68e63b499d60b7a8c7cbc01, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: ProjectionSelection
+    clip: {fileID: 8300000, guid: 98fea9e2ba29a49468756edfd470ac99, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: Death
+    clip: {fileID: 8300000, guid: d7b543baf3964ae4795424c1998f4818, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: GrabAir
+    clip: {fileID: 8300000, guid: a551dd6b8eca8dc4d97be298b13d9822, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Idle
+    clip: {fileID: 8300000, guid: 4ea72ab39e59b6043a003491c162b8ad, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: IdleWind
+    clip: {fileID: 8300000, guid: c3f493682b7d5164e9a2e50dd740f3f9, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: Runing
+    clip: {fileID: 8300000, guid: 86136c661f19f0541829b2bc64c22930, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: RuningWind
+    clip: {fileID: 8300000, guid: cb8f2aa2c2958cd4ca1252954175c216, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: DeathShadow
+    clip: {fileID: 8300000, guid: e243dcc0edb45154a8cd4f58ec5cd26b, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Shadow
+    clip: {fileID: 8300000, guid: 4d2bb7b98a218004dac58bc6c7a9b942, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: ShadowEnd
+    clip: {fileID: 8300000, guid: 5495a1cfab240584e880866b3ee57ab6, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: ShadowLong
+    clip: {fileID: 8300000, guid: c1e74265e9b912b48b93bb53a4e7fcd2, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: PlayerJumpWater1
+    clip: {fileID: 8300000, guid: a94cead972f283747b002623389e724f, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: PlayerJumpWater2
+    clip: {fileID: 8300000, guid: cf03b9a7f9f185446af274de6bdc48a4, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  objects:
+  - name: ButtonOn
+    clip: {fileID: 8300000, guid: bdd72a56e9de9f44f8e4332408fd5862, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: ButtonOff
+    clip: {fileID: 8300000, guid: c71c7db736406d24ea4307bb6f4328da, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: LeverOn
+    clip: {fileID: 8300000, guid: 5f034955a95e1dc4189736e15fd38d91, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: LeverOff
+    clip: {fileID: 8300000, guid: 5f034955a95e1dc4189736e15fd38d91, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: BoxGrab
+    clip: {fileID: 8300000, guid: 4b9acac6490dde94fb9ce64b47707e89, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: AgitatedWater
+    clip: {fileID: 8300000, guid: 6cd9285fdaabd6044ba9bd75a53ad62e, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: Anti-Gravity-Zone
+    clip: {fileID: 8300000, guid: c9df693ed79d8174aaca04b1761e4908, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: BoxCrash
+    clip: {fileID: 8300000, guid: 4d0aa0f38bd45f5408f417b5369052b2, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: BoxMove
+    clip: {fileID: 8300000, guid: a6c61312c45f75343982b2fe8ffe313f, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: BoxTouch
+    clip: {fileID: 8300000, guid: 9bf60a377b60dac438c24f8c0a5dc736, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: DoorClose
+    clip: {fileID: 8300000, guid: c2638d3f9b871bb44b8eab7f576263d6, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: DoorOpen
+    clip: {fileID: 8300000, guid: aecccda9e9cfee44da458460e9a49a60, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: GateClosing
+    clip: {fileID: 8300000, guid: aabbae3736f2df7468b4cf5d79e5b0e0, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: GateOpening
+    clip: {fileID: 8300000, guid: 3dd689370844ead409e6028136bd5272, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Knife Planted
+    clip: {fileID: 8300000, guid: cc7ee298b0b97ea4ca7d06e86f196583, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Knife Sparkle
+    clip: {fileID: 8300000, guid: d1a1b78642df57a43bf0cd0bd8b4eede, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: LightOn
+    clip: {fileID: 8300000, guid: 91f32382db958be488efca17ae6c7b06, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: LightOff
+    clip: {fileID: 8300000, guid: 33d33ade42959c9459d995b5e44b1d6b, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Mechanism1
+    clip: {fileID: 8300000, guid: 313b819e120403843aa1b5bf61fd1106, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1.5
+    loop: 1
+    source: {fileID: 0}
+  - name: Mechanism2
+    clip: {fileID: 8300000, guid: 4b8e7e628a51219479431db098603a87, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: MechanismStop
+    clip: {fileID: 8300000, guid: 5678bc55df71ecb4ab59c75f7c787bb0, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Nails1
+    clip: {fileID: 8300000, guid: 70b6f6dc77c144c438b7212c2e8b93f8, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Nails2
+    clip: {fileID: 8300000, guid: 9eb5076f4d555c746abdd9100df1e202, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Nails3
+    clip: {fileID: 8300000, guid: a4ffc550f9884a244841346921689676, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Nails4
+    clip: {fileID: 8300000, guid: 936bdc4a2ba65fc45b9ef395f0d32865, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: NeonOn
+    clip: {fileID: 8300000, guid: b6fe4642cca98354cb575a218c93d851, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: NeonOff
+    clip: {fileID: 8300000, guid: 17a030e360efb094a9a6ed4faa3d8b2f, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Neon
+    clip: {fileID: 8300000, guid: 8dffcf3b70cdee847931c737cd904c4a, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: ObjectGravity
+    clip: {fileID: 8300000, guid: d7a31fceac7ed3d4c81754b5896fe267, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: PowerUp
+    clip: {fileID: 8300000, guid: 56a8375a8d706854e840863396ebf9bb, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Pressure Plate Stone
+    clip: {fileID: 8300000, guid: d833bad45978abd42a2e33c8cafff183, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: PurpleLiquid
+    clip: {fileID: 8300000, guid: 2b8ffda4df0f569439b28d9c22011dd1, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  - name: StillWater
+    clip: {fileID: 8300000, guid: 4e52b39768f291d4ca0a1df4013d2d5d, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 1
+    Awake: 0
+    source: {fileID: 0}
+  voice:
+  - name: AvoidTheShadow
+    clip: {fileID: 8300000, guid: 82a7446237fd22b4d854255419dd66c8, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: BreakIt
+    clip: {fileID: 8300000, guid: 9e57db546f6d3a84f8765aa47a7af553, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: DodgeIt
+    clip: {fileID: 8300000, guid: 5b8018dd4a96a3447b33211f45af4fa9, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Don'tBeScared
+    clip: {fileID: 8300000, guid: c96befa09b5f8a24e97f5745b7306271, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Don'tGiveUp
+    clip: {fileID: 8300000, guid: 6c65a716045d25044869e0d7bdf2441f, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Don'tOpenThatDoor
+    clip: {fileID: 8300000, guid: 172bac5ce253cb446beac50d7658a91f, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Don'tYouRemember
+    clip: {fileID: 8300000, guid: 79d5a7d841669374eb2f271bfc45fb72, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: GrabIt
+    clip: {fileID: 8300000, guid: 0e03c3876a7765841a0a14b55e19a398, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: I'llProtectYou
+    clip: {fileID: 8300000, guid: d0006bcd831dde34fa85e87dca020e07, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: I'mWatchingOverYou
+    clip: {fileID: 8300000, guid: ec7ee103bdec51f4c961fdcb6603a518, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: I'veBeenWaitingForYouToComeBack
+    clip: {fileID: 8300000, guid: ba53ba7d780ce7c41bc4355a3179cf3c, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: It'sBeenSoLong
+    clip: {fileID: 8300000, guid: f8aa75a2453b3a74383b01779797d756, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: JumpNow
+    clip: {fileID: 8300000, guid: 92350d1cabf9dc34997ce21757c4e666, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: OpenTheDoor
+    clip: {fileID: 8300000, guid: c3fadcd1cb4f76b498527135557616cb, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: EndingRandom
+    clip: {fileID: 8300000, guid: 90da3c2e08f19354489f68b482a904b8, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: RememberMe
+    clip: {fileID: 8300000, guid: 648b80548016cdb42a220b7200845d60, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: RememberNowDon'tYou
+    clip: {fileID: 8300000, guid: 0a62b52cf99a4d940bfa2f22033f7a59, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: SaveMe
+    clip: {fileID: 8300000, guid: 09c172c6033ba0b4d9f97199a993543b, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: Sister
+    clip: {fileID: 8300000, guid: 865bddd34fb940c4ab7b6cc303599226, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: SomeoneWasThereWithYou
+    clip: {fileID: 8300000, guid: 2e55f8463164db943b100e250634db2f, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: StayInTheLight
+    clip: {fileID: 8300000, guid: f99d3ba30df7e544ba3828f668986b23, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: TheLightWillGuideYou
+    clip: {fileID: 8300000, guid: 2b56147d80ff3104899c973807db5d1c, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: There'sADangerAhead
+    clip: {fileID: 8300000, guid: 265d5063203417f4ca1b148440884571, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: TheyBrokeMe
+    clip: {fileID: 8300000, guid: 4acf03473e5e9184bac88658aac34fdf, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: TheyKidnappedUs
+    clip: {fileID: 8300000, guid: 6c8002f4409f1d648bf7b4c3f789d5f6, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: TheyRanExperimentOnUs
+    clip: {fileID: 8300000, guid: fc4e503fd8aabd34d813e4dbcaf5d855, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: ThisHouseBecameMyHome
+    clip: {fileID: 8300000, guid: ccd1a5ef36690964f97e08a74ff90212, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: WatchOut
+    clip: {fileID: 8300000, guid: 165615808e2eca9429a77e324686036c, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: WeWereSoClose
+    clip: {fileID: 8300000, guid: a4f622a326a1c7c478c4675b489e9253, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: YouForgotEverything
+    clip: {fileID: 8300000, guid: 560a0399672193a40a6a188f517ed58b, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: YouMustRecollectYourMemories
+    clip: {fileID: 8300000, guid: 16e36471b47feb44eb6cb95a805f5466, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: YouNeedToGoDown
+    clip: {fileID: 8300000, guid: 623044c5109a2f343bdb4209c8f13e5b, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: YouNeedToGoUp
+    clip: {fileID: 8300000, guid: e8115face3d6e024abe47718dbb0a804, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: YouNeedToMakeItMove
+    clip: {fileID: 8300000, guid: 95436df09a19f9d4fad01f8936280af5, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  - name: YourMemoriesAreBack
+    clip: {fileID: 8300000, guid: 7d75ec8f259c0d547b0d24eb1453f52c, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 0
+    pitch: 0
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  uiObject:
+  - name: ClickUI
+    clip: {fileID: 8300000, guid: 6e06d813be7aef640816ba866c0aa5f9, type: 3}
+    ModifSFX: {fileID: 6273162953656426347, guid: 01f350a4acb458d40b8902143b735fbf, type: 2}
+    volume: 1
+    pitch: 1.5
+    loop: 0
+    Awake: 0
+    source: {fileID: 0}
+  uiObject: []

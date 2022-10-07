@@ -1,0 +1,225 @@
+//[VFX_FootStep] [System] Update Particle,1
+//Don't delete the previous line or this one
+#pragma kernel CSMain
+#define NB_THREADS_PER_GROUP 64
+#define HAS_ATTRIBUTES 1
+#define VFX_PASSDEPTH_ACTUAL (0)
+#define VFX_PASSDEPTH_MOTION_VECTOR (1)
+#define VFX_PASSDEPTH_SELECTION (2)
+#define VFX_PASSDEPTH_SHADOW (3)
+#define VFX_USE_VELOCITY_CURRENT 1
+#define VFX_USE_LIFETIME_CURRENT 1
+#define VFX_USE_POSITION_CURRENT 1
+#define VFX_USE_MASS_CURRENT 1
+#define VFX_USE_ALIVE_CURRENT 1
+#define VFX_USE_AGE_CURRENT 1
+#define VFX_HAS_INDIRECT_DRAW 1
+#define VFX_LOCAL_SPACE 1
+#include "Packages/com.unity.render-pipelines.high-definition/Runtime/VFXGraph/Shaders/VFXDefines.hlsl"
+
+
+CBUFFER_START(parameters)
+    float deltaTime_a;
+    uint3 PADDING_0;
+CBUFFER_END
+
+
+struct Attributes
+{
+    float3 velocity;
+    float lifetime;
+    float3 position;
+    float mass;
+    bool alive;
+    float age;
+};
+
+struct SourceAttributes
+{
+};
+
+
+
+
+#define USE_DEAD_LIST (VFX_USE_ALIVE_CURRENT && !HAS_STRIPS)
+
+RWByteAddressBuffer attributeBuffer;
+
+#if USE_DEAD_LIST
+RWStructuredBuffer<uint> deadListOut;
+#endif
+
+#if VFX_HAS_INDIRECT_DRAW
+RWStructuredBuffer<uint> indirectBuffer;
+#endif
+
+#if HAS_STRIPS
+RWStructuredBuffer<uint> stripDataBuffer;
+#endif
+
+#if VFX_USE_STRIPALIVE_CURRENT
+StructuredBuffer<uint> attachedStripDataBuffer;
+#endif
+
+CBUFFER_START(updateParams)
+    uint nbMax;
+	uint dispatchWidth;
+	uint systemSeed;
+CBUFFER_END
+
+#include "Packages/com.unity.visualeffectgraph/Shaders/Common/VFXCommonCompute.hlsl"
+#include "Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.hlsl"
+
+
+
+void Turbulence_18D(float3 position, inout float3 velocity, float mass, float4x4 InvFieldTransform, float4x4 FieldTransform, float Intensity, float Drag, float frequency, int octaves, float roughness, float lacunarity, float deltaTime) /*Mode:Relative NoiseType:Value */
+{
+    float3 vectorFieldCoord = mul(InvFieldTransform, float4(position,1.0f)).xyz;
+    
+    float3 value = GenerateValueCurlNoise(vectorFieldCoord + 0.5f, frequency, octaves, roughness, lacunarity);
+    value = mul(FieldTransform,float4(value,0.0f)).xyz * Intensity;
+    
+    velocity += (value - velocity) * min(1.0f,Drag * deltaTime / mass);
+}
+void EulerIntegration(inout float3 position, float3 velocity, float deltaTime)
+{
+    position += velocity * deltaTime;
+}
+void Age(inout float age, float deltaTime)
+{
+    age += deltaTime;
+}
+void Reap(float age, float lifetime, inout bool alive)
+{
+    if(age > lifetime) { alive = false; }
+}
+
+
+
+[numthreads(NB_THREADS_PER_GROUP,1,1)]
+void CSMain(uint3 groupId          : SV_GroupID,
+            uint3 groupThreadId    : SV_GroupThreadID)
+{
+	uint id = groupThreadId.x + groupId.x * NB_THREADS_PER_GROUP + groupId.y * dispatchWidth * NB_THREADS_PER_GROUP;
+	uint index = id;
+	if (id < nbMax)
+	{
+        Attributes attributes = (Attributes)0;
+		SourceAttributes sourceAttributes = (SourceAttributes)0;
+
+#if VFX_USE_ALIVE_CURRENT
+		attributes.alive = (attributeBuffer.Load((index * 0x2 + 0x120) << 2));
+		
+
+		if (attributes.alive)
+		{
+			attributes.velocity = asfloat(attributeBuffer.Load3((index * 0x4 + 0x0) << 2));
+			attributes.lifetime = asfloat(attributeBuffer.Load((index * 0x1 + 0x80) << 2));
+			attributes.position = asfloat(attributeBuffer.Load3((index * 0x4 + 0xA0) << 2));
+			attributes.mass = (float)1;
+			attributes.age = asfloat(attributeBuffer.Load((index * 0x2 + 0x121) << 2));
+			
+
+
+#if HAS_STRIPS
+            const StripData stripData = GetStripDataFromParticleIndex(index, PARTICLE_PER_STRIP_COUNT);
+            InitStripAttributes(index, attributes, stripData);
+#endif
+
+#if VFX_UPDATE_SKIP_ZERO_DELTA_TIME
+			
+			if (deltaTime != 0.0f)
+#endif
+			{
+				{
+				    Turbulence_18D(attributes.position,  /*inout */attributes.velocity, attributes.mass, float4x4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1), float4x4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1), (float)0.150000006, (float)1, (float)1, (int)1, (float)0.5, (float)2, deltaTime_a);
+				}
+				EulerIntegration( /*inout */attributes.position, attributes.velocity, deltaTime_a);
+				Age( /*inout */attributes.age, deltaTime_a);
+				Reap(attributes.age, attributes.lifetime,  /*inout */attributes.alive);
+				
+
+			}
+
+			if (attributes.alive)
+			{
+				attributeBuffer.Store3((index * 0x4 + 0x0) << 2,asuint(attributes.velocity));
+				attributeBuffer.Store3((index * 0x4 + 0xA0) << 2,asuint(attributes.position));
+				attributeBuffer.Store((index * 0x2 + 0x121) << 2,asuint(attributes.age));
+				
+
+#if VFX_HAS_INDIRECT_DRAW
+                uint indirectIndex = indirectBuffer.IncrementCounter();
+				indirectBuffer[indirectIndex] = index;
+#endif
+
+#if HAS_STRIPS			
+				uint relativeIndexInStrip = GetRelativeIndex(index, stripData);
+				InterlockedMin(STRIP_DATA(STRIP_MIN_ALIVE, stripData.stripIndex), relativeIndexInStrip);
+				InterlockedMax(STRIP_DATA(STRIP_MAX_ALIVE, stripData.stripIndex), relativeIndexInStrip);
+#endif
+			}
+			else
+			{
+				attributeBuffer.Store((index * 0x2 + 0x120) << 2,uint(attributes.alive));
+				
+
+#if USE_DEAD_LIST && !VFX_USE_STRIPALIVE_CURRENT
+				uint deadIndex = deadListOut.IncrementCounter();
+				deadListOut[deadIndex] = index;
+#endif
+			}
+		}
+#if USE_DEAD_LIST && VFX_USE_STRIPALIVE_CURRENT
+        else if (attributes.stripAlive)
+        {
+            if (STRIP_DATA_X(attachedStripDataBuffer, STRIP_MIN_ALIVE, index) == ~1) // Attached strip is no longer alive, recycle the particle 
+            {
+                uint deadIndex = deadListOut.IncrementCounter();
+				deadListOut[deadIndex] = index;
+                attributes.stripAlive = false;
+                
+            }            
+        }
+#endif
+#else
+		attributes.velocity = asfloat(attributeBuffer.Load3((index * 0x4 + 0x0) << 2));
+		attributes.lifetime = asfloat(attributeBuffer.Load((index * 0x1 + 0x80) << 2));
+		attributes.position = asfloat(attributeBuffer.Load3((index * 0x4 + 0xA0) << 2));
+		attributes.mass = (float)1;
+		attributes.alive = (attributeBuffer.Load((index * 0x2 + 0x120) << 2));
+		attributes.age = asfloat(attributeBuffer.Load((index * 0x2 + 0x121) << 2));
+		
+
+#if HAS_STRIPS
+        const StripData stripData = GetStripDataFromParticleIndex(index, PARTICLE_PER_STRIP_COUNT);
+        InitStripAttributes(index, attributes, stripData);
+#endif
+
+#if VFX_UPDATE_SKIP_ZERO_DELTA_TIME
+		
+		if (deltaTime != 0.0f)
+#endif
+		{
+			{
+			    Turbulence_18D(attributes.position,  /*inout */attributes.velocity, attributes.mass, float4x4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1), float4x4(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1), (float)0.150000006, (float)1, (float)1, (int)1, (float)0.5, (float)2, deltaTime_a);
+			}
+			EulerIntegration( /*inout */attributes.position, attributes.velocity, deltaTime_a);
+			Age( /*inout */attributes.age, deltaTime_a);
+			Reap(attributes.age, attributes.lifetime,  /*inout */attributes.alive);
+			
+
+		}
+		attributeBuffer.Store3((index * 0x4 + 0x0) << 2,asuint(attributes.velocity));
+		attributeBuffer.Store3((index * 0x4 + 0xA0) << 2,asuint(attributes.position));
+		attributeBuffer.Store((index * 0x2 + 0x120) << 2,uint(attributes.alive));
+		attributeBuffer.Store((index * 0x2 + 0x121) << 2,asuint(attributes.age));
+		
+
+#if VFX_HAS_INDIRECT_DRAW
+        uint indirectIndex = indirectBuffer.IncrementCounter();
+		indirectBuffer[indirectIndex] = index;
+#endif
+#endif
+	}
+}
